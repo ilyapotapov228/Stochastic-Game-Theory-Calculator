@@ -35,6 +35,7 @@
             this.SimulationInitialise = new System.Windows.Forms.Button();
             this.GaphInitialise = new System.Windows.Forms.Button();
             this.Canvas = new System.Windows.Forms.PictureBox();
+            this.CoordinatesLabel = new System.Windows.Forms.Label();
             this.ModelSelectionPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -47,7 +48,7 @@
             // 
             this.ModelSelection.AutoSize = true;
             this.ModelSelection.Font = new System.Drawing.Font("Times New Roman", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ModelSelection.Location = new System.Drawing.Point(16, 67);
+            this.ModelSelection.Location = new System.Drawing.Point(19, 104);
             this.ModelSelection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ModelSelection.Name = "ModelSelection";
             this.ModelSelection.Size = new System.Drawing.Size(211, 32);
@@ -56,9 +57,10 @@
             // 
             // MatrixInitialise
             // 
-            this.MatrixInitialise.Location = new System.Drawing.Point(12, 123);
+            this.MatrixInitialise.AutoSize = true;
+            this.MatrixInitialise.Location = new System.Drawing.Point(16, 194);
             this.MatrixInitialise.Name = "MatrixInitialise";
-            this.MatrixInitialise.Size = new System.Drawing.Size(101, 39);
+            this.MatrixInitialise.Size = new System.Drawing.Size(172, 66);
             this.MatrixInitialise.TabIndex = 3;
             this.MatrixInitialise.Text = "Normal";
             this.MatrixInitialise.UseVisualStyleBackColor = true;
@@ -76,9 +78,7 @@
             // 
             // ModelSelectionPannel
             // 
-            this.ModelSelectionPannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.ModelSelectionPannel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ModelSelectionPannel.AutoScrollMargin = new System.Drawing.Size(50, 60);
             this.ModelSelectionPannel.Controls.Add(this.solveButton);
             this.ModelSelectionPannel.Controls.Add(this.pictureBox4);
             this.ModelSelectionPannel.Controls.Add(this.pictureBox3);
@@ -92,15 +92,15 @@
             this.ModelSelectionPannel.Controls.Add(this.MatrixInitialise);
             this.ModelSelectionPannel.Location = new System.Drawing.Point(12, 12);
             this.ModelSelectionPannel.Name = "ModelSelectionPannel";
-            this.ModelSelectionPannel.Size = new System.Drawing.Size(246, 642);
+            this.ModelSelectionPannel.Size = new System.Drawing.Size(421, 943);
             this.ModelSelectionPannel.TabIndex = 5;
             // 
             // solveButton
             // 
             this.solveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.solveButton.Location = new System.Drawing.Point(53, 560);
+            this.solveButton.Location = new System.Drawing.Point(84, 842);
             this.solveButton.Name = "solveButton";
-            this.solveButton.Size = new System.Drawing.Size(125, 65);
+            this.solveButton.Size = new System.Drawing.Size(238, 65);
             this.solveButton.TabIndex = 12;
             this.solveButton.Text = "Solve";
             this.solveButton.UseVisualStyleBackColor = true;
@@ -108,9 +108,9 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(153, 358);
+            this.pictureBox4.Location = new System.Drawing.Point(233, 648);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(60, 57);
+            this.pictureBox4.Size = new System.Drawing.Size(131, 123);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
@@ -118,9 +118,9 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(145, 280);
+            this.pictureBox3.Location = new System.Drawing.Point(233, 491);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(82, 61);
+            this.pictureBox3.Size = new System.Drawing.Size(137, 106);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
@@ -128,9 +128,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(145, 188);
+            this.pictureBox2.Location = new System.Drawing.Point(233, 308);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(67, 67);
+            this.pictureBox2.Size = new System.Drawing.Size(142, 140);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
@@ -138,36 +138,36 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(129, 111);
+            this.pictureBox1.Location = new System.Drawing.Point(233, 172);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 60);
+            this.pictureBox1.Size = new System.Drawing.Size(142, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
             // ConnectionInitialise
             // 
-            this.ConnectionInitialise.Location = new System.Drawing.Point(11, 367);
+            this.ConnectionInitialise.Location = new System.Drawing.Point(14, 690);
             this.ConnectionInitialise.Name = "ConnectionInitialise";
-            this.ConnectionInitialise.Size = new System.Drawing.Size(136, 39);
+            this.ConnectionInitialise.Size = new System.Drawing.Size(180, 48);
             this.ConnectionInitialise.TabIndex = 7;
             this.ConnectionInitialise.Text = "Connection";
             this.ConnectionInitialise.UseVisualStyleBackColor = true;
             // 
             // SimulationInitialise
             // 
-            this.SimulationInitialise.Location = new System.Drawing.Point(11, 289);
+            this.SimulationInitialise.Location = new System.Drawing.Point(16, 524);
             this.SimulationInitialise.Name = "SimulationInitialise";
-            this.SimulationInitialise.Size = new System.Drawing.Size(128, 39);
+            this.SimulationInitialise.Size = new System.Drawing.Size(172, 49);
             this.SimulationInitialise.TabIndex = 6;
-            this.SimulationInitialise.Text = "Stochasitc";
+            this.SimulationInitialise.Text = "Stochastic";
             this.SimulationInitialise.UseVisualStyleBackColor = true;
             // 
             // GaphInitialise
             // 
-            this.GaphInitialise.Location = new System.Drawing.Point(11, 207);
+            this.GaphInitialise.Location = new System.Drawing.Point(16, 361);
             this.GaphInitialise.Name = "GaphInitialise";
-            this.GaphInitialise.Size = new System.Drawing.Size(121, 39);
+            this.GaphInitialise.Size = new System.Drawing.Size(165, 50);
             this.GaphInitialise.TabIndex = 5;
             this.GaphInitialise.Text = "Extensive";
             this.GaphInitialise.UseVisualStyleBackColor = true;
@@ -178,16 +178,29 @@
             this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Canvas.Location = new System.Drawing.Point(0, 0);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(1016, 666);
+            this.Canvas.Size = new System.Drawing.Size(1619, 1072);
             this.Canvas.TabIndex = 6;
             this.Canvas.TabStop = false;
             this.Canvas.Click += new System.EventHandler(this.Canvas_Click);
+            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
+            // 
+            // CoordinatesLabel
+            // 
+            this.CoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CoordinatesLabel.AutoSize = true;
+            this.CoordinatesLabel.Font = new System.Drawing.Font("Times New Roman", 7.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CoordinatesLabel.Location = new System.Drawing.Point(1395, 1036);
+            this.CoordinatesLabel.Name = "CoordinatesLabel";
+            this.CoordinatesLabel.Size = new System.Drawing.Size(37, 24);
+            this.CoordinatesLabel.TabIndex = 8;
+            this.CoordinatesLabel.Text = "0,0";
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 666);
+            this.ClientSize = new System.Drawing.Size(1619, 1072);
+            this.Controls.Add(this.CoordinatesLabel);
             this.Controls.Add(this.ModelSelectionPannel);
             this.Controls.Add(this.Canvas);
             this.Font = new System.Drawing.Font("Times New Roman", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,6 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -224,6 +238,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label CoordinatesLabel;
     }
 }
 

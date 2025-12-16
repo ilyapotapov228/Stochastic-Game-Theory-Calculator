@@ -12,19 +12,20 @@ namespace Stochastic_Game_Theory_Calculator
 {
     public partial class mainWindow : Form
     {
+        private PointF currentPosition;
         public mainWindow()
         {
             InitializeComponent();
         }
 
-        private Matrix currentMatrix; 
+        private Matrix currentMatrix;
 
         class CanvasManager
         {
             private float zoomLevel = 1.0f;
             private float panX = 0.0f;
             private float panY = 0.0f;
-            
+
         }
         class CanvasRenderer
         {
@@ -40,7 +41,6 @@ namespace Stochastic_Game_Theory_Calculator
             public string[] RowStrategies { get; set; }
             public string[] ColStrategies { get; set; }
 
-            //position of the matrix on the canvas
             public float X { get; set; } = 50;
             public float Y { get; set; } = 50;
 
@@ -56,6 +56,75 @@ namespace Stochastic_Game_Theory_Calculator
             {
                 matrix.payoffs = payoffs;
             }
+
+
+        }
+
+        class Graph
+        {
+            public class Node
+            {
+                public string NodeID { get; set; }
+                public bool isTerminal { get; set; }
+
+                public float[] payoffs = new float[2];
+
+                public Player owner { get; set; }
+                public List<string> connectedNodes { get; set; }
+            }
+            public class Player
+            {
+                public string name { get; set; }
+                public List<string> Nodes { get; set; }
+            }
+
+            public static Node[] currentGraph;
+
+            public float X { get; set; } = 50;
+            public float Y { get; set; } = 50;
+
+            public static Node[] defaultGraph()
+            {
+                Player player1 = new Player();
+                player1.name = "Player 1";
+                Player player2 = new Player();
+                player2.name = "Player 2";
+                Node nodeA = new Node();
+                nodeA.NodeID = "1";
+                nodeA.isTerminal = false;
+                nodeA.owner = player1;
+                Node nodeB = new Node();
+                nodeB.NodeID = "2";
+                nodeB.isTerminal = true;
+                nodeB.payoffs = new float[] { 3, 2 };
+                nodeA.connectedNodes = new List<string> { nodeB.NodeID };
+                Node nodeC = new Node();
+                nodeC.NodeID = "3";
+                nodeC.isTerminal = false;
+                nodeC.owner = player2;
+                nodeC.connectedNodes = new List<string> { nodeA.NodeID };
+                Node nodeD = new Node();
+                nodeD.NodeID = "4";
+                nodeD.isTerminal = true;
+                nodeD.payoffs = new float[] { 1, 4 };
+                nodeD.connectedNodes = new List<string> { nodeC.NodeID };
+                Node nodeE = new Node();
+                nodeE.NodeID = "5";
+                nodeE.isTerminal = true;
+                nodeE.payoffs = new float[] { 0, 0 };
+                nodeE.connectedNodes = new List<string> { nodeC.NodeID };
+                return (currentGraph = new Node[] { nodeA, nodeB, nodeC, nodeD, nodeE });
+            }
+
+            public void EditGraph(Node[] nodes)
+            {
+                //add
+            }
+        }
+
+        class Algorithms
+        {
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -75,7 +144,7 @@ namespace Stochastic_Game_Theory_Calculator
         private void MatrixInitialise_Click(object sender, EventArgs e)
         {
             currentMatrix = new Matrix();
-          
+
 
         }
 
@@ -87,6 +156,33 @@ namespace Stochastic_Game_Theory_Calculator
         private void Canvas_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            currentPosition = PointToCartesian(e.Location);
+            CoordinatesLabel.Text = $"{currentPosition.X:F2}, {currentPosition.Y:F2}";
+        }
+
+        private float DPI
+        {
+            get
+            {
+                using (Graphics g = this.CreateGraphics())
+                {
+                    return g.DpiX;
+                }
+
+            }
+
+        }
+        private PointF PointToCartesian(Point point)
+        {
+            return new PointF(Pixel_to_Mm(point.X), Pixel_to_Mm(CoordinatesLabel.Height - point.Y));
+        }
+        private float Pixel_to_Mm(float pixel)
+        {
+            return (pixel / DPI) * 25.4f;
         }
     }
 }
