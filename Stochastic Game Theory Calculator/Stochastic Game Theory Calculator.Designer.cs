@@ -192,7 +192,7 @@
             this.CoordinatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CoordinatesLabel.AutoSize = true;
             this.CoordinatesLabel.Font = new System.Drawing.Font("Times New Roman", 7.875F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CoordinatesLabel.Location = new System.Drawing.Point(1395, 1036);
+            this.CoordinatesLabel.Location = new System.Drawing.Point(1477, 1039);
             this.CoordinatesLabel.Name = "CoordinatesLabel";
             this.CoordinatesLabel.Size = new System.Drawing.Size(37, 24);
             this.CoordinatesLabel.TabIndex = 8;

@@ -49,14 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Point.cs" />
-    <Compile Include="GraphicsExtension\GraphicsExtension.cs" />
     <Compile Include="MatrixModification.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MatrixModification.Designer.cs">
       <DependentUpon>MatrixModification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Graph.cs" />
     <Compile Include="Models\Matrix.cs" />
     <Compile Include="Stochastic Game Theory Calculator.cs">
       <SubType>Form</SubType>
