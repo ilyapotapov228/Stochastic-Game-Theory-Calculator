@@ -135,11 +135,11 @@
             // 
             this.CancelChanges.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.CancelChanges.Font = new System.Drawing.Font("Times New Roman", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelChanges.Location = new System.Drawing.Point(677, 559);
+            this.CancelChanges.Location = new System.Drawing.Point(685, 559);
             this.CancelChanges.Name = "CancelChanges";
-            this.CancelChanges.Size = new System.Drawing.Size(134, 54);
+            this.CancelChanges.Size = new System.Drawing.Size(120, 54);
             this.CancelChanges.TabIndex = 7;
-            this.CancelChanges.Text = "Return Saved Payoffs";
+            this.CancelChanges.Text = "Return Saved Data";
             this.CancelChanges.UseVisualStyleBackColor = true;
             this.CancelChanges.Click += new System.EventHandler(this.CancelChanges_Click);
             // 
