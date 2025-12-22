@@ -18,6 +18,7 @@ namespace Stochastic_Game_Theory_Calculator
     public partial class MatrixModification : Form
     {
         public Matrix currentMatrix = new Matrix();
+        public bool isSaved = false;
 
         public void recieveMatrix(Matrix matrix)
         {
@@ -124,6 +125,7 @@ namespace Stochastic_Game_Theory_Calculator
             { 
                 MessageBox.Show("Model Saved");
             }
+            isSaved = true;
         }
 
         private bool SaveBeforeEdit()
