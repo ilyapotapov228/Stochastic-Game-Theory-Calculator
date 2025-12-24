@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -17,10 +18,10 @@ namespace Stochastic_Game_Theory_Calculator
 {
     public partial class MatrixModification : Form
     {
-        public Matrix currentMatrix = new Matrix();
+        public Models.Matrix currentMatrix = new Models.Matrix();
         public bool isSaved = false;
 
-        public void recieveMatrix(Matrix matrix)
+        public void recieveMatrix(Models.Matrix matrix)
         {
             currentMatrix = matrix;
         }
@@ -85,38 +86,15 @@ namespace Stochastic_Game_Theory_Calculator
         {
             MatrixBlueprint.RowCount = currentMatrix.rows + 2;
             MatrixBlueprint.ColumnCount = currentMatrix.cols + 2;
-
             MatrixBlueprint.ColumnHeadersVisible = false;
             MatrixBlueprint.RowHeadersVisible = false;
             MatrixBlueprint[0, 0].ReadOnly = true;
             MatrixBlueprint[1, 1].ReadOnly = true;
-            AccesabilityLimit();
             MatrixBlueprint.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             MatrixBlueprint.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             MatrixBlueprint.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            for (int r = 0; r < currentMatrix.rows; r++)
-            {
-                for (int c = 0; c < currentMatrix.cols; c++)
-                {
-                    MatrixBlueprint[c+2, r+2].Value = currentMatrix.payoffs[r, c];
-                }
-            }
-            MatrixBlueprint.DefaultCellStyle.Font = new Font("Times New Roman", 14);
-            MatrixBlueprint.RowTemplate.Height = 40;
-            MatrixBlueprint[0, 2].Value = currentMatrix.Players[0];
-            MatrixBlueprint[2, 0].Value = currentMatrix.Players[1];
-            MatrixBlueprint[0, 0].Value = "Matrix ID "+currentMatrix.MatrixID;
-
-            for (int c = 0; c < currentMatrix.cols; c++)
-            {
-                MatrixBlueprint[c + 2, 1].Value = currentMatrix.ColStrategies[c];
-            }
-
-            for (int r = 0; r < currentMatrix.rows; r++)
-            {
-                MatrixBlueprint[1, r + 2].Value = currentMatrix.RowStrategies[r];
-            }
+            DisplayMatrix(currentMatrix);
         }
 
         private void SaveChanges_Click(object sender, EventArgs e)
@@ -156,7 +134,7 @@ namespace Stochastic_Game_Theory_Calculator
             return true;
         }
 
-        public void DisplayMatrix(Matrix matrix)
+        public void DisplayMatrix(Models.Matrix matrix)
         {
             currentMatrix = matrix;
             MatrixBlueprint.RowCount = currentMatrix.rows + 2;

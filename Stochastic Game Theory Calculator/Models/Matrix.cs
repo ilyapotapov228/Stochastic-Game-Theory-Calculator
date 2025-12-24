@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace Stochastic_Game_Theory_Calculator.Models
         public float X { get; set; } = 50;
         public float Y { get; set; } = 50;
 
+        public RectangleF hitbox { get; set; }
+
         public Matrix defaultMatrix()
         {
             rows = 2;
@@ -35,6 +38,7 @@ namespace Stochastic_Game_Theory_Calculator.Models
             ColStrategies = new string[] { "Cooperate", "Defect" };
             Players = new string[] { "Player 1", "Player 2" };
             MatrixID = 0;
+
             return this;
         }
 
