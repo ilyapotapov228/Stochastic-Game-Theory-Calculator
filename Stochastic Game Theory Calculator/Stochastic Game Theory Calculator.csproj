@@ -55,7 +55,6 @@
     <Compile Include="MatrixModification.Designer.cs">
       <DependentUpon>MatrixModification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Graph.cs" />
     <Compile Include="Models\Matrix.cs" />
     <Compile Include="Stochastic Game Theory Calculator.cs">
       <SubType>Form</SubType>
@@ -71,7 +70,6 @@
     <Compile Include="StochasticModification.Designer.cs">
       <DependentUpon>StochasticModification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vector.cs" />
     <EmbeddedResource Include="MatrixModification.resx">
       <DependentUpon>MatrixModification.cs</DependentUpon>
     </EmbeddedResource>

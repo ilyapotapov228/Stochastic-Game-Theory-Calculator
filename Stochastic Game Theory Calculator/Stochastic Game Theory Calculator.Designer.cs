@@ -29,16 +29,13 @@
             this.solveButton = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ConnectionInitialise = new System.Windows.Forms.Button();
             this.SimulationInitialise = new System.Windows.Forms.Button();
-            this.GaphInitialise = new System.Windows.Forms.Button();
             this.Canvas = new System.Windows.Forms.PictureBox();
             this.ModelSelectionPannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.SuspendLayout();
@@ -46,11 +43,11 @@
             // ModelSelection
             // 
             this.ModelSelection.AutoSize = true;
-            this.ModelSelection.Font = new System.Drawing.Font("Times New Roman", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModelSelection.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ModelSelection.Location = new System.Drawing.Point(19, 104);
             this.ModelSelection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ModelSelection.Name = "ModelSelection";
-            this.ModelSelection.Size = new System.Drawing.Size(141, 22);
+            this.ModelSelection.Size = new System.Drawing.Size(204, 32);
             this.ModelSelection.TabIndex = 2;
             this.ModelSelection.Text = "Model Selection";
             // 
@@ -63,14 +60,14 @@
             this.MatrixInitialise.Name = "MatrixInitialise";
             this.MatrixInitialise.Size = new System.Drawing.Size(172, 49);
             this.MatrixInitialise.TabIndex = 3;
-            this.MatrixInitialise.Text = "Normal";
+            this.MatrixInitialise.Text = "New Matrix";
             this.MatrixInitialise.UseVisualStyleBackColor = false;
             this.MatrixInitialise.Click += new System.EventHandler(this.MatrixInitialise_Click);
             // 
             // tutorialButton
             // 
             this.tutorialButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tutorialButton.Location = new System.Drawing.Point(11, 18);
+            this.tutorialButton.Location = new System.Drawing.Point(16, 12);
             this.tutorialButton.Name = "tutorialButton";
             this.tutorialButton.Size = new System.Drawing.Size(126, 39);
             this.tutorialButton.TabIndex = 4;
@@ -85,17 +82,15 @@
             this.ModelSelectionPannel.Controls.Add(this.solveButton);
             this.ModelSelectionPannel.Controls.Add(this.pictureBox4);
             this.ModelSelectionPannel.Controls.Add(this.pictureBox3);
-            this.ModelSelectionPannel.Controls.Add(this.pictureBox2);
             this.ModelSelectionPannel.Controls.Add(this.pictureBox1);
             this.ModelSelectionPannel.Controls.Add(this.ConnectionInitialise);
             this.ModelSelectionPannel.Controls.Add(this.SimulationInitialise);
-            this.ModelSelectionPannel.Controls.Add(this.GaphInitialise);
             this.ModelSelectionPannel.Controls.Add(this.ModelSelection);
             this.ModelSelectionPannel.Controls.Add(this.tutorialButton);
             this.ModelSelectionPannel.Controls.Add(this.MatrixInitialise);
             this.ModelSelectionPannel.Location = new System.Drawing.Point(12, 12);
             this.ModelSelectionPannel.Name = "ModelSelectionPannel";
-            this.ModelSelectionPannel.Size = new System.Drawing.Size(401, 1051);
+            this.ModelSelectionPannel.Size = new System.Drawing.Size(401, 925);
             this.ModelSelectionPannel.TabIndex = 5;
             // 
             // solveButton
@@ -103,7 +98,7 @@
             this.solveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.solveButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.solveButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.solveButton.Location = new System.Drawing.Point(84, 950);
+            this.solveButton.Location = new System.Drawing.Point(82, 762);
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(238, 65);
             this.solveButton.TabIndex = 12;
@@ -113,7 +108,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(233, 501);
+            this.pictureBox4.Location = new System.Drawing.Point(233, 315);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(131, 123);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -123,22 +118,12 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(233, 657);
+            this.pictureBox3.Location = new System.Drawing.Point(233, 496);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(137, 106);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(233, 308);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(142, 140);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -154,7 +139,7 @@
             // 
             this.ConnectionInitialise.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ConnectionInitialise.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ConnectionInitialise.Location = new System.Drawing.Point(16, 535);
+            this.ConnectionInitialise.Location = new System.Drawing.Point(16, 354);
             this.ConnectionInitialise.Name = "ConnectionInitialise";
             this.ConnectionInitialise.Size = new System.Drawing.Size(180, 48);
             this.ConnectionInitialise.TabIndex = 7;
@@ -165,24 +150,13 @@
             // 
             this.SimulationInitialise.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.SimulationInitialise.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SimulationInitialise.Location = new System.Drawing.Point(16, 683);
+            this.SimulationInitialise.Location = new System.Drawing.Point(16, 519);
             this.SimulationInitialise.Name = "SimulationInitialise";
             this.SimulationInitialise.Size = new System.Drawing.Size(172, 49);
             this.SimulationInitialise.TabIndex = 6;
             this.SimulationInitialise.Text = "Stochastic";
             this.SimulationInitialise.UseVisualStyleBackColor = false;
             this.SimulationInitialise.Click += new System.EventHandler(this.SimulationInitialise_Click);
-            // 
-            // GaphInitialise
-            // 
-            this.GaphInitialise.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.GaphInitialise.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GaphInitialise.Location = new System.Drawing.Point(16, 354);
-            this.GaphInitialise.Name = "GaphInitialise";
-            this.GaphInitialise.Size = new System.Drawing.Size(165, 50);
-            this.GaphInitialise.TabIndex = 5;
-            this.GaphInitialise.Text = "Extensive";
-            this.GaphInitialise.UseVisualStyleBackColor = false;
             // 
             // Canvas
             // 
@@ -192,7 +166,7 @@
             this.Canvas.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Canvas.Location = new System.Drawing.Point(419, 0);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(1200, 1072);
+            this.Canvas.Size = new System.Drawing.Size(1082, 949);
             this.Canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Canvas.TabIndex = 6;
             this.Canvas.TabStop = false;
@@ -206,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1619, 1072);
+            this.ClientSize = new System.Drawing.Size(1501, 949);
             this.Controls.Add(this.Canvas);
             this.Controls.Add(this.ModelSelectionPannel);
             this.Font = new System.Drawing.Font("Times New Roman", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -222,7 +196,6 @@
             this.ModelSelectionPannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.ResumeLayout(false);
@@ -237,11 +210,9 @@
         private System.Windows.Forms.PictureBox Canvas;
         private System.Windows.Forms.Button ConnectionInitialise;
         private System.Windows.Forms.Button SimulationInitialise;
-        private System.Windows.Forms.Button GaphInitialise;
         private System.Windows.Forms.Button solveButton;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

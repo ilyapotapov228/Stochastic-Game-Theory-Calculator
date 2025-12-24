@@ -21,11 +21,6 @@ namespace Stochastic_Game_Theory_Calculator
         public Models.Matrix[] savedMaticies;
         public int matrixID = 0;
 
-
-        private Graph currentGraph;
-        private Graph[] savedGraphs;
-        private int graphID = 0;
-
         private int currentSimulations;
 
         public Font text_font = new Font("Times New Roman", 11, FontStyle.Regular);
@@ -45,19 +40,11 @@ namespace Stochastic_Game_Theory_Calculator
             Canvas.MouseWheel += Canvas_MouseWheel;
         }
 
-        class Algorithms
-        {
-            
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
             savedMaticies = new Models.Matrix[100];
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
         // This subroutine will handle the initialisation of a new matrix
         private void MatrixInitialise_Click(object sender, EventArgs e)
         {
@@ -294,8 +281,8 @@ namespace Stochastic_Game_Theory_Calculator
         private void Canvas_MouseWheel(object sender, MouseEventArgs e)
         {
 
-            float canvX = (e.X - zoomFocus.X) / zoomDelta;
-            float cnavY = (e.Y - zoomFocus.Y) / zoomDelta;
+            float canvasX = (e.X - zoomFocus.X) / zoomDelta;
+            float canvasY = (e.Y - zoomFocus.Y) / zoomDelta;
 
             if(e.Delta > 0)
             {
@@ -315,12 +302,11 @@ namespace Stochastic_Game_Theory_Calculator
                 zoomDelta = 4.0f;
             }
 
-            zoomFocus.X = e.X - (canvX * zoomDelta);
-            zoomFocus.Y = e.Y - (cnavY * zoomDelta);
+            zoomFocus.X = e.X - (canvasX * zoomDelta);
+            zoomFocus.Y = e.Y - (canvasY * zoomDelta);
 
             Canvas.Invalidate();
         }
-
 
         //this subroutine will convert screen coordinates to world coordinates which is nessecary for selecting objects on a canvas by clicking on them 
         private PointF screenToWorldTranslate(Point screenCoord)
