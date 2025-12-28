@@ -253,16 +253,31 @@ namespace Stochastic_Game_Theory_Calculator
         //this loop will compare each strategy length in columns and will save the longest one, this is neccesary as it columns in the matrix are the same and are determined by the longest strategy name
         private float LongestCol(Models.Matrix matrix, Graphics g)
         {
-            float longestCol = 0;
+            float maxWidth = 0;
             foreach (string s in matrix.ColStrategies)
             {
                 SizeF size = g.MeasureString(s, text_font);
-                if (size.Width > longestCol)
+                if (size.Width > maxWidth)
                 {
-                    longestCol = size.Width;
+                    maxWidth = size.Width;
                 }
             }
-            return longestCol;
+
+            for (int r = 0; r < matrix.rows; r++)
+            {
+                for (int c = 0; c < matrix.cols; c++)
+                {
+                    string text = matrix.payoffs[r, c];
+
+                    SizeF size = g.MeasureString(text, payoff_font);
+                    if (size.Width > maxWidth)
+                    {
+                        maxWidth = size.Width;
+                    }
+                }
+            }
+
+            return maxWidth;
 
         }
         private void DrawMatrix(Graphics g, Models.Matrix matrix)
