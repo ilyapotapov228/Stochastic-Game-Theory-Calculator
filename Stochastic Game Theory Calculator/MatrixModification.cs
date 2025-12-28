@@ -318,9 +318,13 @@ namespace Stochastic_Game_Theory_Calculator
 
         private void DeleteMatrixButton_Click(object sender, EventArgs e)
         {
-            deleted = true;
-            MessageBox.Show("Matrix Deleted");
-            Close();
+            DialogResult check_beofre_delete = MessageBox.Show("Are you sure you want to delete currently selected matrix?", "Deleting Matrix",MessageBoxButtons.YesNo);
+            if (check_beofre_delete == DialogResult.Yes)
+            {
+                deleted = true;
+                MessageBox.Show("Matrix Deleted");
+                Close();
+            }
         }
     }   
 }

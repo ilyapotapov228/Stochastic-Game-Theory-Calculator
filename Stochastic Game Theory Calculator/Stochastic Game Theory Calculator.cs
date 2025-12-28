@@ -25,6 +25,7 @@ namespace Stochastic_Game_Theory_Calculator
 
         public Font text_font = new Font("Times New Roman", 11, FontStyle.Regular);
         public Font payoff_font = new Font("Times New Roman", 12, FontStyle.Regular);
+        public Font name_font = new Font("Times New Roman", 12, FontStyle.Bold);
 
         int CellBuffer = 5;
 
@@ -281,8 +282,8 @@ namespace Stochastic_Game_Theory_Calculator
             using (Pen gridPen = new Pen(Color.Black, 1))
             using (StringFormat format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
             {
-                g.DrawString(matrix.Players[0], text_font, Brushes.Black, new PointF(matrix.X - 35, matrix.Y + cellHight + (gridH / 2)), format);
-                g.DrawString(matrix.Players[1], text_font, Brushes.Black, new PointF(matrix.X + cellWidth + (gridW / 2), matrix.Y - 10), format);
+                g.DrawString(matrix.Players[0], name_font, Brushes.Black, new PointF(matrix.X - 47, matrix.Y + cellHight + (gridH / 2)), format);
+                g.DrawString(matrix.Players[1], name_font, Brushes.Black, new PointF(matrix.X + cellWidth + (gridW / 2), matrix.Y - 10), format);
 
                 for (int r = 0; r < matrix.rows; r++)
                 {
