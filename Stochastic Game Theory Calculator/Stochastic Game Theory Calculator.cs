@@ -24,8 +24,9 @@ namespace Stochastic_Game_Theory_Calculator
         private int currentSimulations;
 
         public Font text_font = new Font("Times New Roman", 11, FontStyle.Regular);
+        public Font payoff_font = new Font("Times New Roman", 12, FontStyle.Regular);
 
-        int inCellBuffer = 0;
+        int CellBuffer = 5;
 
         private float zoomDelta = 0.6f;
         private PointF zoomFocus = new PointF(0, 0);
@@ -66,7 +67,11 @@ namespace Stochastic_Game_Theory_Calculator
             MM.recieveMatrix(currentMatrix);
             MM.ShowDialog();
 
-            if (MM.isSaved)
+            if (MM.deleted)
+            {
+                savedMaticies[currentMatrix.MatrixID] = null;
+            }
+            else if (MM.isSaved)
             {
                 bool positionVerified = false;
 
@@ -84,7 +89,7 @@ namespace Stochastic_Game_Theory_Calculator
 
                         for (int i = 0; i < matrixID; i++)
                         {
-                            if (savedMaticies[i].MatrixID == currentMatrix.MatrixID)
+                            if (savedMaticies[i] == null || savedMaticies[i].MatrixID == currentMatrix.MatrixID)
                             {
                                 continue;
                             }
@@ -106,10 +111,7 @@ namespace Stochastic_Game_Theory_Calculator
                 }
                 savedMaticies[currentMatrix.MatrixID] = MM.currentMatrix;
             }
-            else if (MM.deleted)
-            {
-                savedMaticies[currentMatrix.MatrixID] = null;
-            }
+
             Canvas.Invalidate();
         }
         private void tutorialButton_Click(object sender, EventArgs e)
@@ -267,7 +269,7 @@ namespace Stochastic_Game_Theory_Calculator
             float cellHight = 60;
             float cellWidth = 100;
 
-            cellWidth = Math.Max(cellHight, LongestCol(matrix,g) + inCellBuffer);
+            cellWidth = Math.Max(cellHight, LongestCol(matrix,g) + CellBuffer);
 
             float gridW = matrix.cols * cellWidth;
             float gridH = matrix.rows * cellHight;
@@ -280,13 +282,13 @@ namespace Stochastic_Game_Theory_Calculator
             using (StringFormat format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
             {
                 g.DrawString(matrix.Players[0], text_font, Brushes.Black, new PointF(matrix.X - 35, matrix.Y + cellHight + (gridH / 2)), format);
-                g.DrawString(matrix.Players[1], text_font, Brushes.Black, new PointF(matrix.X + (gridW/2)+45, matrix.Y - 15));
+                g.DrawString(matrix.Players[1], text_font, Brushes.Black, new PointF(matrix.X + cellWidth + (gridW / 2), matrix.Y - 10), format);
 
                 for (int r = 0; r < matrix.rows; r++)
                 {
                     float rowYcord = matrix.Y + cellHight + (r * cellHight);
-                    RectangleF rowStrats = new RectangleF(matrix.X, rowYcord, cellWidth, cellHight);
-                    g.DrawString(matrix.RowStrategies[r], text_font, Brushes.Black, rowStrats, format);
+                    RectangleF rowStrategies = new RectangleF((matrix.X)-CellBuffer, rowYcord, cellWidth, cellHight);
+                    g.DrawString(matrix.RowStrategies[r], text_font, Brushes.Black, rowStrategies, format);
 
                     for (int c = 0; c < matrix.cols; c++)
                     {
@@ -300,7 +302,7 @@ namespace Stochastic_Game_Theory_Calculator
                         g.DrawRectangle(gridPen, colXcrd, rowYcord, cellWidth, cellHight);
 
                         RectangleF cellPic = new RectangleF(colXcrd, rowYcord, cellWidth, cellHight);
-                        g.DrawString(matrix.payoffs[r, c], text_font, Brushes.Black, cellPic, format);
+                        g.DrawString(matrix.payoffs[r, c], payoff_font, Brushes.Black, cellPic, format);
                     }
                 }
             }
@@ -350,7 +352,7 @@ namespace Stochastic_Game_Theory_Calculator
         {
             float cellHight = 60;
 
-            float cellWidth = Math.Max(cellHight, LongestCol(matrix, g) + inCellBuffer);
+            float cellWidth = Math.Max(cellHight, LongestCol(matrix, g) + CellBuffer);
 
             float totalWidth = (matrix.cols * cellWidth) + cellWidth;
 

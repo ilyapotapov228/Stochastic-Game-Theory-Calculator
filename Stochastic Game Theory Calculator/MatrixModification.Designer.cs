@@ -80,7 +80,7 @@
             // SaveChanges
             // 
             this.SaveChanges.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.SaveChanges.Location = new System.Drawing.Point(838, 565);
+            this.SaveChanges.Location = new System.Drawing.Point(825, 547);
             this.SaveChanges.Name = "SaveChanges";
             this.SaveChanges.Size = new System.Drawing.Size(114, 48);
             this.SaveChanges.TabIndex = 1;
@@ -91,7 +91,7 @@
             // AddRow
             // 
             this.AddRow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddRow.Location = new System.Drawing.Point(12, 572);
+            this.AddRow.Location = new System.Drawing.Point(12, 554);
             this.AddRow.Name = "AddRow";
             this.AddRow.Size = new System.Drawing.Size(84, 35);
             this.AddRow.TabIndex = 2;
@@ -102,7 +102,7 @@
             // DeleteRow
             // 
             this.DeleteRow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.DeleteRow.Location = new System.Drawing.Point(102, 572);
+            this.DeleteRow.Location = new System.Drawing.Point(102, 554);
             this.DeleteRow.Name = "DeleteRow";
             this.DeleteRow.Size = new System.Drawing.Size(93, 35);
             this.DeleteRow.TabIndex = 3;
@@ -113,7 +113,7 @@
             // AddColumn
             // 
             this.AddColumn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddColumn.Location = new System.Drawing.Point(233, 572);
+            this.AddColumn.Location = new System.Drawing.Point(233, 554);
             this.AddColumn.Name = "AddColumn";
             this.AddColumn.Size = new System.Drawing.Size(106, 35);
             this.AddColumn.TabIndex = 4;
@@ -124,7 +124,7 @@
             // DeleteColumn
             // 
             this.DeleteColumn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.DeleteColumn.Location = new System.Drawing.Point(345, 572);
+            this.DeleteColumn.Location = new System.Drawing.Point(345, 554);
             this.DeleteColumn.Name = "DeleteColumn";
             this.DeleteColumn.Size = new System.Drawing.Size(119, 35);
             this.DeleteColumn.TabIndex = 5;
@@ -136,7 +136,7 @@
             // 
             this.CancelChanges.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.CancelChanges.Font = new System.Drawing.Font("Times New Roman", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelChanges.Location = new System.Drawing.Point(699, 565);
+            this.CancelChanges.Location = new System.Drawing.Point(686, 547);
             this.CancelChanges.Name = "CancelChanges";
             this.CancelChanges.Size = new System.Drawing.Size(120, 48);
             this.CancelChanges.TabIndex = 7;
@@ -146,7 +146,8 @@
             // 
             // DeleteMatrixButton
             // 
-            this.DeleteMatrixButton.Location = new System.Drawing.Point(594, 565);
+            this.DeleteMatrixButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.DeleteMatrixButton.Location = new System.Drawing.Point(581, 547);
             this.DeleteMatrixButton.Name = "DeleteMatrixButton";
             this.DeleteMatrixButton.Size = new System.Drawing.Size(99, 48);
             this.DeleteMatrixButton.TabIndex = 8;
