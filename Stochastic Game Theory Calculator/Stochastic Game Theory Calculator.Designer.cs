@@ -77,6 +77,8 @@
             // 
             // ModelSelectionPannel
             // 
+            this.ModelSelectionPannel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ModelSelectionPannel.AutoScrollMargin = new System.Drawing.Size(50, 60);
             this.ModelSelectionPannel.BackColor = System.Drawing.SystemColors.Window;
             this.ModelSelectionPannel.Controls.Add(this.solveButton);
@@ -164,9 +166,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Canvas.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Canvas.Location = new System.Drawing.Point(419, 0);
+            this.Canvas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Canvas.Location = new System.Drawing.Point(419, 12);
             this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(1082, 949);
+            this.Canvas.Size = new System.Drawing.Size(1070, 925);
             this.Canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Canvas.TabIndex = 6;
             this.Canvas.TabStop = false;

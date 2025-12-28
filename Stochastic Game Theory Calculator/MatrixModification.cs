@@ -19,11 +19,14 @@ namespace Stochastic_Game_Theory_Calculator
     public partial class MatrixModification : Form
     {
         public Models.Matrix currentMatrix = new Models.Matrix();
+        public Models.Matrix lastSavedMatrix = new Models.Matrix();
         public bool isSaved = false;
+        public bool deleted = false;
 
         public void recieveMatrix(Models.Matrix matrix)
         {
             currentMatrix = matrix;
+            lastSavedMatrix = copyMatrix(matrix);
         }
 
         public MatrixModification()
@@ -99,20 +102,17 @@ namespace Stochastic_Game_Theory_Calculator
 
         private void SaveChanges_Click(object sender, EventArgs e)
         {
-            if (SaveBeforeEdit())
-            { 
+            if(VerifyPayofsFloat())
+            {
+                lastSavedMatrix = copyMatrix(currentMatrix);
+                SaveBeforeEdit();
                 MessageBox.Show("Model Saved");
+                isSaved = true;
             }
-            isSaved = true;
         }
 
-        private bool SaveBeforeEdit()
+        private void SaveBeforeEdit()
         {
-            if (!VerifyPayofsFloat())
-            { 
-                return false;
-            }
-
             for (int r = 0; r < currentMatrix.rows; r++)
                 {
                     for (int c = 0; c < currentMatrix.cols; c++)
@@ -131,7 +131,6 @@ namespace Stochastic_Game_Theory_Calculator
                 }
                 currentMatrix.Players[0] = MatrixBlueprint[0, 2].Value.ToString();
                 currentMatrix.Players[1] = MatrixBlueprint[2, 0].Value.ToString();
-            return true;
         }
 
         public void DisplayMatrix(Models.Matrix matrix)
@@ -178,7 +177,7 @@ namespace Stochastic_Game_Theory_Calculator
 
         private void AddRow_Click(object sender, EventArgs e)
         {
-            if (!SaveBeforeEdit()) return;
+            SaveBeforeEdit();
 
             currentMatrix.rows += 1;
 
@@ -202,7 +201,7 @@ namespace Stochastic_Game_Theory_Calculator
 
             for (int c = 0; c < currentMatrix.cols; c++)
             {
-                temporaryPayoffs[currentMatrix.rows-1, c] = "0,0";
+                temporaryPayoffs[currentMatrix.rows-1, c] = "null";
             }
 
             currentMatrix.RowStrategies = temporaryRowStrategies;
@@ -216,7 +215,7 @@ namespace Stochastic_Game_Theory_Calculator
                 MessageBox.Show("Cannot have fewer than 1 strategy.");
                 return;
             }
-            if (!SaveBeforeEdit()) return;
+            SaveBeforeEdit();
             currentMatrix.rows -= 1;
             string[,] temporaryPayoffs = new string[currentMatrix.rows, currentMatrix.cols];
             string[] temporaryRowStrategies = new string[currentMatrix.rows];
@@ -239,7 +238,7 @@ namespace Stochastic_Game_Theory_Calculator
 
         private void AddColumn_Click(object sender, EventArgs e)
         {
-            if (!SaveBeforeEdit()) return;
+            SaveBeforeEdit();
             currentMatrix.cols += 1;
             string[,] temporaryPayoffs = new string[currentMatrix.rows, currentMatrix.cols];
             string[] temporaryColStrategies = new string[currentMatrix.cols];
@@ -257,7 +256,7 @@ namespace Stochastic_Game_Theory_Calculator
             temporaryColStrategies[currentMatrix.cols - 1] = "Strategy";
             for (int r = 0; r < currentMatrix.rows; r++)
             {
-                temporaryPayoffs[r, currentMatrix.cols - 1] = "0,0";
+                temporaryPayoffs[r, currentMatrix.cols - 1] = "null";
             }
             currentMatrix.ColStrategies = temporaryColStrategies;
             currentMatrix.payoffs = temporaryPayoffs;
@@ -272,7 +271,7 @@ namespace Stochastic_Game_Theory_Calculator
                 return;
             }
 
-            if (!SaveBeforeEdit()) return;
+            SaveBeforeEdit();
             currentMatrix.cols -= 1;
             string[,] temporaryPayoffs = new string[currentMatrix.rows, currentMatrix.cols];
             string[] temporaryColStrategies = new string[currentMatrix.cols];
@@ -292,9 +291,36 @@ namespace Stochastic_Game_Theory_Calculator
             DisplayMatrix(currentMatrix);
         }
 
+        private Models.Matrix copyMatrix(Models.Matrix originalMatrix)
+        {
+            Models.Matrix updatedMatrix = new Models.Matrix();
+            
+            updatedMatrix.cols = originalMatrix.cols;
+            updatedMatrix.rows = originalMatrix.rows;
+
+            updatedMatrix.MatrixID = originalMatrix.MatrixID;
+
+            updatedMatrix.payoffs = originalMatrix.payoffs;
+
+            updatedMatrix.Players = originalMatrix.Players;
+            updatedMatrix.RowStrategies = originalMatrix.RowStrategies;
+            updatedMatrix.ColStrategies = originalMatrix.ColStrategies;
+            updatedMatrix.payoffs = originalMatrix.payoffs;
+
+            return updatedMatrix;
+        }
+
         private void CancelChanges_Click(object sender, EventArgs e)
         {
+            currentMatrix = copyMatrix(lastSavedMatrix);
             DisplayMatrix(currentMatrix);
+        }
+
+        private void DeleteMatrixButton_Click(object sender, EventArgs e)
+        {
+            deleted = true;
+            MessageBox.Show("Matrix Deleted");
+            Close();
         }
     }   
 }

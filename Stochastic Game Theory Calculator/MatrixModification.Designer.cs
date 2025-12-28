@@ -38,6 +38,7 @@
             this.AddColumn = new System.Windows.Forms.Button();
             this.DeleteColumn = new System.Windows.Forms.Button();
             this.CancelChanges = new System.Windows.Forms.Button();
+            this.DeleteMatrixButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MatrixBlueprint)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,7 +93,7 @@
             this.AddRow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.AddRow.Location = new System.Drawing.Point(12, 572);
             this.AddRow.Name = "AddRow";
-            this.AddRow.Size = new System.Drawing.Size(115, 35);
+            this.AddRow.Size = new System.Drawing.Size(84, 35);
             this.AddRow.TabIndex = 2;
             this.AddRow.Text = "Add Row";
             this.AddRow.UseVisualStyleBackColor = true;
@@ -101,9 +102,9 @@
             // DeleteRow
             // 
             this.DeleteRow.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.DeleteRow.Location = new System.Drawing.Point(133, 572);
+            this.DeleteRow.Location = new System.Drawing.Point(102, 572);
             this.DeleteRow.Name = "DeleteRow";
-            this.DeleteRow.Size = new System.Drawing.Size(136, 35);
+            this.DeleteRow.Size = new System.Drawing.Size(93, 35);
             this.DeleteRow.TabIndex = 3;
             this.DeleteRow.Text = "Delete Row";
             this.DeleteRow.UseVisualStyleBackColor = true;
@@ -112,9 +113,9 @@
             // AddColumn
             // 
             this.AddColumn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.AddColumn.Location = new System.Drawing.Point(310, 572);
+            this.AddColumn.Location = new System.Drawing.Point(233, 572);
             this.AddColumn.Name = "AddColumn";
-            this.AddColumn.Size = new System.Drawing.Size(147, 35);
+            this.AddColumn.Size = new System.Drawing.Size(106, 35);
             this.AddColumn.TabIndex = 4;
             this.AddColumn.Text = "Add Column";
             this.AddColumn.UseVisualStyleBackColor = true;
@@ -123,9 +124,9 @@
             // DeleteColumn
             // 
             this.DeleteColumn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.DeleteColumn.Location = new System.Drawing.Point(463, 572);
+            this.DeleteColumn.Location = new System.Drawing.Point(345, 572);
             this.DeleteColumn.Name = "DeleteColumn";
-            this.DeleteColumn.Size = new System.Drawing.Size(185, 35);
+            this.DeleteColumn.Size = new System.Drawing.Size(119, 35);
             this.DeleteColumn.TabIndex = 5;
             this.DeleteColumn.Text = "Delete Column";
             this.DeleteColumn.UseVisualStyleBackColor = true;
@@ -135,19 +136,30 @@
             // 
             this.CancelChanges.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.CancelChanges.Font = new System.Drawing.Font("Times New Roman", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelChanges.Location = new System.Drawing.Point(685, 559);
+            this.CancelChanges.Location = new System.Drawing.Point(699, 565);
             this.CancelChanges.Name = "CancelChanges";
-            this.CancelChanges.Size = new System.Drawing.Size(120, 54);
+            this.CancelChanges.Size = new System.Drawing.Size(120, 48);
             this.CancelChanges.TabIndex = 7;
-            this.CancelChanges.Text = "Return Saved Data";
+            this.CancelChanges.Text = "Return Last Saved";
             this.CancelChanges.UseVisualStyleBackColor = true;
             this.CancelChanges.Click += new System.EventHandler(this.CancelChanges_Click);
             // 
+            // DeleteMatrixButton
+            // 
+            this.DeleteMatrixButton.Location = new System.Drawing.Point(594, 565);
+            this.DeleteMatrixButton.Name = "DeleteMatrixButton";
+            this.DeleteMatrixButton.Size = new System.Drawing.Size(99, 48);
+            this.DeleteMatrixButton.TabIndex = 8;
+            this.DeleteMatrixButton.Text = "Delete Matrix";
+            this.DeleteMatrixButton.UseVisualStyleBackColor = true;
+            this.DeleteMatrixButton.Click += new System.EventHandler(this.DeleteMatrixButton_Click);
+            // 
             // MatrixModification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 619);
+            this.Controls.Add(this.DeleteMatrixButton);
             this.Controls.Add(this.CancelChanges);
             this.Controls.Add(this.DeleteColumn);
             this.Controls.Add(this.AddColumn);
@@ -176,5 +188,6 @@
         private System.Windows.Forms.Button AddColumn;
         private System.Windows.Forms.Button DeleteColumn;
         private System.Windows.Forms.Button CancelChanges;
+        private System.Windows.Forms.Button DeleteMatrixButton;
     }
 }

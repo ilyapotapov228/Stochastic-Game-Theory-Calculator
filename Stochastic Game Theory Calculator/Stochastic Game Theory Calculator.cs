@@ -34,6 +34,9 @@ namespace Stochastic_Game_Theory_Calculator
         private PointF selectPoint = new PointF(0, 0);
         private PointF startingPosition = new PointF(0, 0);
         private bool isDragged = false;
+
+        private bool panning = false;
+        private PointF previousPoint;
         public mainWindow()
         {
             InitializeComponent();
@@ -50,16 +53,21 @@ namespace Stochastic_Game_Theory_Calculator
         {
             currentMatrix = new Models.Matrix();
             currentMatrix = currentMatrix.defaultMatrix();
+            currentMatrix.X = 100;
+            currentMatrix.Y = 70;
             currentMatrix.setMatrixID(matrixID);
+            editMatrix();
+            matrixID++;
+        }
 
+        public void editMatrix()
+        {
             MatrixModification MM = new MatrixModification();
             MM.recieveMatrix(currentMatrix);
             MM.ShowDialog();
 
             if (MM.isSaved)
             {
-                currentMatrix.X = 100;
-                currentMatrix.Y = 70;
                 bool positionVerified = false;
 
                 using (Graphics g = this.CreateGraphics())
@@ -76,7 +84,7 @@ namespace Stochastic_Game_Theory_Calculator
 
                         for (int i = 0; i < matrixID; i++)
                         {
-                            if (matrixID == i)
+                            if (savedMaticies[i].MatrixID == currentMatrix.MatrixID)
                             {
                                 continue;
                             }
@@ -96,11 +104,13 @@ namespace Stochastic_Game_Theory_Calculator
                     }
 
                 }
-
                 savedMaticies[currentMatrix.MatrixID] = MM.currentMatrix;
-                matrixID++;
-                Canvas.Invalidate();
             }
+            else if (MM.deleted)
+            {
+                savedMaticies[currentMatrix.MatrixID] = null;
+            }
+            Canvas.Invalidate();
         }
         private void tutorialButton_Click(object sender, EventArgs e)
         {
@@ -124,6 +134,14 @@ namespace Stochastic_Game_Theory_Calculator
 
                 Canvas.Invalidate();
             }
+            else if(panning)
+            {
+                zoomFocus.X += e.X - previousPoint.X;
+                zoomFocus.Y += e.Y - previousPoint.Y;
+                previousPoint = e.Location;
+                Canvas.Invalidate();
+            }
+
         }
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
@@ -131,51 +149,48 @@ namespace Stochastic_Game_Theory_Calculator
             {
                 bool collision = false;
 
-                using( Graphics g = this.CreateGraphics())
+                using (Graphics g = this.CreateGraphics())
                 {
+                    savedMaticies[movingMatrixID].hitbox = MatrixBounds(savedMaticies[movingMatrixID], g);
 
-                    //loop through coordinates of each existing matrix to ensure none intersect
-
-                    Models.Matrix otherMatrix = new Models.Matrix();
-
-                    for (int i = 0; i < matrixID; i++)
-                    {
-                        //avoid checking coordinates of the dragged matrix with it's old position
-                        if(i == movingMatrixID) 
-                        { 
-                            continue; 
-                        }
-                        otherMatrix = savedMaticies[i];
-                        otherMatrix.hitbox = MatrixBounds(savedMaticies[movingMatrixID], this.CreateGraphics());
-
-                        if (otherMatrix != null)
+                        for (int i = 0; i < matrixID; i++)
                         {
-                            //get the dymentions of the matrix that is being compared with
-                            RectangleF otherMatrixHitBox = MatrixBounds(otherMatrix, g);
-                            
-                            if(otherMatrix.hitbox.IntersectsWith(otherMatrixHitBox))
+                            //avoid checking coordinates of the dragged matrix with it's old position
+                            if (i == movingMatrixID)
                             {
-                                collision = true;
-                                break;
+                                continue;
                             }
+
+                            if (savedMaticies[i] != null)
+                            {
+                                //get the dymentions of the matrix that is being compared with
+
+                                savedMaticies[i].hitbox = MatrixBounds(savedMaticies[i], g);
+
+                                if (savedMaticies[i].hitbox.IntersectsWith(savedMaticies[movingMatrixID].hitbox))
+                                {
+                                    collision = true;
+                                    break;
+                                }
+                            }
+
                         }
-
-                    }
-
-                    //if the collision happens, the matrix returns back to where it was before the movement
+                }
+                    //if the collision happens, the moving matrix returns back to where it was before the movement
 
                     if (collision)
                     {
-                        currentMatrix.X = startingPosition.X;
-                        currentMatrix.Y = startingPosition.Y;
+                        savedMaticies[movingMatrixID].X = startingPosition.X;
+                        savedMaticies[movingMatrixID].Y = startingPosition.Y;
                         MessageBox.Show("Matrices cannot overlap");
                     }
 
                     isDragged = false;
                     movingMatrixID = -1;
-                }
+                
                 Canvas.Invalidate();
             }
+            panning = false;
         }
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
@@ -183,27 +198,40 @@ namespace Stochastic_Game_Theory_Calculator
 
             using (Graphics g = this.CreateGraphics())
             {
-
-                for (int i = 0; i < matrixID; i++)
-                {
-                    Models.Matrix matrix = savedMaticies[i];
-                    if (matrix != null)
+              
+                    for (int i = 0; i < matrixID; i++)
                     {
-                        matrix.hitbox = MatrixBounds(matrix, g);
-
-                        if (matrix.hitbox.Contains(worldMouseLocation))
+                        Models.Matrix matrix = savedMaticies[i];
+                        if (matrix != null)
                         {
-                            movingMatrixID = i;
-                            isDragged = true;
+                            matrix.hitbox = MatrixBounds(matrix, g);
 
-                            selectPoint = new PointF(worldMouseLocation.X - matrix.X, worldMouseLocation.Y - matrix.Y);
+                            if (e.Button == MouseButtons.Right && matrix.hitbox.Contains(worldMouseLocation))
+                            {
+                                currentMatrix = matrix;
+                                editMatrix();
+                                break;
+                            }
+                            else if (matrix.hitbox.Contains(worldMouseLocation))
+                            {
+                                movingMatrixID = i;
+                                isDragged = true;
 
-                            startingPosition = new PointF(matrix.X, matrix.Y);
+                                selectPoint = new PointF(worldMouseLocation.X - matrix.X, worldMouseLocation.Y - matrix.Y);
 
-                            break;
+                                startingPosition = new PointF(matrix.X, matrix.Y);
+
+                                break;
+                            }
                         }
                     }
+                
+                if (movingMatrixID == -1 && e.Button == MouseButtons.Left)
+                {
+                    panning = true;
+                    previousPoint = e.Location;
                 }
+
             }
         }
         private void Canvas_Paint(object sender, PaintEventArgs e)
