@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Stochastic_Game_Theory_Calculator;
@@ -18,12 +19,14 @@ namespace Stochastic_Game_Theory_Calculator.Models
 
         public string Name;
 
+        public Stack<Matrix> VersionsStack { get; set; } = new Stack<Matrix>();
+
         public string[] Players { get; set; }
 
         public int MatrixID { get; set; }
 
-        public float X { get; set; } = 50;
-        public float Y { get; set; } = 50;
+        public float X { get; set; } = 150;
+        public float Y { get; set; } = 80;
 
         public RectangleF hitbox { get; set; }
 
@@ -39,15 +42,9 @@ namespace Stochastic_Game_Theory_Calculator.Models
             RowStrategies = new string[] { "Cooperate", "Defect" };
             ColStrategies = new string[] { "Cooperate", "Defect" };
             Players = new string[] { "Player 1", "Player 2" };
-            MatrixID = 0;
             Name = "Default Name";
 
             return this;
-        }
-
-        public void setMatrixID(int id)
-        {
-            MatrixID = id;
         }
 
     }

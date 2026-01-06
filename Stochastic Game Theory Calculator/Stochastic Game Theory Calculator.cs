@@ -27,11 +27,13 @@ namespace Stochastic_Game_Theory_Calculator
         public Font payoff_font = new Font("Times New Roman", 12, FontStyle.Regular);
         public Font player_font = new Font("Times New Roman", 12, FontStyle.Bold);
         public Font name_font = new Font("Times New Roman", 14, FontStyle.Italic);
+        public Font origin_font = new Font("Times New Roman", 25, FontStyle.Bold);
 
         int CellBuffer = 5;
 
-        private float zoomDelta = 0.6f;
+        private float zoomDelta = 0.9f;
         private PointF zoomFocus = new PointF(0, 0);
+        private PointF originPoint = new PointF(0,0);
 
         private int movingMatrixID = -1;
         private PointF selectPoint = new PointF(0, 0);
@@ -61,11 +63,52 @@ namespace Stochastic_Game_Theory_Calculator
             {
                 currentMatrix = new Models.Matrix();
                 currentMatrix = currentMatrix.defaultMatrix();
-                currentMatrix.X = 100;
-                currentMatrix.Y = 70;
-                currentMatrix.setMatrixID(matrixID);
-                editMatrix();
+                currentMatrix.MatrixID = matrixID;
                 matrixID++;
+                editMatrix();
+            }
+        }
+
+        public void localise_matrix(Models.Matrix matrix)
+        {
+            bool positionVerified = false;
+
+            matrix.X = 150;
+            matrix.Y = 80;
+
+            using (Graphics g = this.CreateGraphics())
+            {
+                //try different locaations until it is not taken
+                while (!positionVerified)
+                {
+                    //assume true, and if not change back to false
+                    positionVerified = true;
+
+
+                    matrix.hitbox = MatrixBounds(matrix, g);
+
+
+                    for (int i = 0; i < matrixID; i++)
+                    {
+                        if (savedMaticies[i] == null || savedMaticies[i].MatrixID == matrix.MatrixID)
+                        {
+                            continue;
+                        }
+                        else if (savedMaticies[i] != null)
+                        {
+                            if (matrix.hitbox.IntersectsWith(savedMaticies[i].hitbox))
+                            {
+                                positionVerified = false;
+                                matrix.X += 20;
+                                matrix.Y += 20;
+                                break;
+                            }
+                        }
+
+                    }
+
+                }
+
             }
         }
 
@@ -82,42 +125,7 @@ namespace Stochastic_Game_Theory_Calculator
             else if (MM.isSaved)
             {
                 currentMatrix = MM.currentMatrix;
-                bool positionVerified = false;
-
-                using (Graphics g = this.CreateGraphics())
-                {
-                    //try different locaations until it is not taken
-                    while (!positionVerified)
-                    {
-                        //assume true, and if not change back to false
-                        positionVerified = true;
-
-
-                        currentMatrix.hitbox = MatrixBounds(currentMatrix, g);
-
-
-                        for (int i = 0; i < matrixID; i++)
-                        {
-                            if (savedMaticies[i] == null || savedMaticies[i].MatrixID == currentMatrix.MatrixID)
-                            {
-                                continue;
-                            }
-                            else if (savedMaticies[i] != null)
-                            {
-                                if (currentMatrix.hitbox.IntersectsWith(savedMaticies[i].hitbox))
-                                {
-                                    positionVerified = false;
-                                    currentMatrix.X += 20;
-                                    currentMatrix.Y += 20;
-                                    break;
-                                }
-                            }
-
-                        }
-
-                    }
-
-                }
+                localise_matrix(currentMatrix);
                 savedMaticies[currentMatrix.MatrixID] = MM.currentMatrix;
             }
 
@@ -322,7 +330,7 @@ namespace Stochastic_Game_Theory_Calculator
             using (Pen gridPen = new Pen(Color.Black, 1))
             using (StringFormat format = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
             {
-                g.DrawString(matrix.Players[0], player_font, Brushes.Black, new PointF(matrix.X - 47, matrix.Y + cellHight + (gridH / 2)), format);
+                g.DrawString(matrix.Players[0], player_font, Brushes.Black, new PointF(matrix.X - (g.MeasureString(matrix.Players[0], player_font).Width / 2) - CellBuffer, matrix.Y + cellHight + (gridH / 2)), format);
                 g.DrawString(matrix.Players[1], player_font, Brushes.Black, new PointF(matrix.X + cellWidth + (gridW / 2), matrix.Y - 10), format);
                 g.DrawString(matrix.Name, name_font, Brushes.Black, new PointF(matrix.X,matrix.Y), format);
 
@@ -348,6 +356,8 @@ namespace Stochastic_Game_Theory_Calculator
                     }
                 }
             }
+
+            g.DrawString("*", origin_font, Brushes.Red, originPoint);
         }
 
         private void Canvas_MouseWheel(object sender, MouseEventArgs e)
@@ -365,9 +375,9 @@ namespace Stochastic_Game_Theory_Calculator
                 zoomDelta = zoomDelta * 0.9f;
             }
 
-            if (zoomDelta < 0.5f)
+            if (zoomDelta < 0.3f)
             {
-                zoomDelta = 0.5f;
+                zoomDelta = 0.3f;
             }
             if (zoomDelta > 4.0f)
             {
@@ -400,15 +410,17 @@ namespace Stochastic_Game_Theory_Calculator
 
             float totalHeight = (matrix.rows * cellHight) + cellHight;
 
-            return new RectangleF(matrix.X, matrix.Y, totalWidth, totalHeight);
+            return new RectangleF(matrix.X, matrix.Y, totalWidth + 30f, totalHeight+30f);
         }
 
         private void SimulationInitialise_Click(object sender, EventArgs e)
         {
-            stopSelection();
-            StochasticModification SM = new StochasticModification();
-            SM.ShowDialog();
-            currentSimulations = SM.itterations;
+            if (!stopSelection())
+            {
+                StochasticModification SM = new StochasticModification();
+                SM.ShowDialog();
+                currentSimulations = SM.itterations;
+            }
         }
 
         private bool stopSelection()
@@ -472,7 +484,7 @@ namespace Stochastic_Game_Theory_Calculator
 
         public void BestResponceEnumeration()
         {
-            MessageBox.Show("The selected matrix will now be solved via the Best Responce Enumeration Algorithm");
+            MessageBox.Show(currentMatrix.Name + " will now be solved via the Best Responce Enumeration Algorithm");
 
             //prepare data for comparison, from easy to display form into easy to analyse form
 
@@ -563,7 +575,7 @@ namespace Stochastic_Game_Theory_Calculator
                 //return results
                 if (NashEqualibria.Count > 0)
                 {
-                    string outputString = "Pure Strategy Nash Equilibria found:\n\n";
+                    string outputString = "Pure Strategy Nash Equilibria in "+currentMatrix.Name+" are:\n\n";
                     foreach (string val in NashEqualibria)
                     {
                         outputString += val + "\n\n";
@@ -572,10 +584,45 @@ namespace Stochastic_Game_Theory_Calculator
                 }
                 else
                 {
-                    MessageBox.Show("No Pure Strategy Nash Equilibrium exists.", "Output");
+                    MessageBox.Show("In "+ currentMatrix.Name + " no Pure Strategy Nash Equilibrium exists.", "Output");
                 }
 
         }
 
+        private void ConnectionInitialise_Click(object sender, EventArgs e)
+        {
+            if (!stopSelection())
+            {
+                
+            }
+        }
+
+        private void return_to_origin_Click(object sender, EventArgs e)
+        {
+            zoomFocus = originPoint;
+            Canvas.Invalidate();
+        }
+
+        private void lockalise_matricies_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < matrixID; i++)
+            {
+                if (savedMaticies[i] == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    localise_matrix(savedMaticies[i]); 
+                }
+            }
+            Canvas.Invalidate();
+        }
+
+        private void zoom_to_default_Click(object sender, EventArgs e)
+        {
+            zoomDelta = 0.9f;
+            Canvas.Invalidate();
+        }
     }
 }

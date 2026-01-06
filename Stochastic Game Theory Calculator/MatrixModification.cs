@@ -19,14 +19,13 @@ namespace Stochastic_Game_Theory_Calculator
     public partial class MatrixModification : Form
     {
         public Models.Matrix currentMatrix = new Models.Matrix();
-        public Models.Matrix lastSavedMatrix = new Models.Matrix();
         public bool isSaved = false;
         public bool deleted = false;
 
         public void recieveMatrix(Models.Matrix matrix)
         {
             currentMatrix = copyMatrix(matrix);
-            lastSavedMatrix = copyMatrix(matrix);
+            currentMatrix.VersionsStack.Push(copyMatrix(currentMatrix));
         }
 
         public MatrixModification()
@@ -104,8 +103,8 @@ namespace Stochastic_Game_Theory_Calculator
         {
             if(VerifyPayofsFloat())
             {
+                currentMatrix.VersionsStack.Push(copyMatrix(currentMatrix));
                 SaveBeforeEdit();
-                lastSavedMatrix = copyMatrix(currentMatrix);
                 MessageBox.Show("Model Saved");
                 isSaved = true;
             }
@@ -314,14 +313,12 @@ namespace Stochastic_Game_Theory_Calculator
 
             updatedMatrix.Name = originalMatrix.Name;
 
+            updatedMatrix.VersionsStack = originalMatrix.VersionsStack;
+
             return updatedMatrix;
         }
 
-        private void CancelChanges_Click(object sender, EventArgs e)
-        {
-            currentMatrix = copyMatrix(lastSavedMatrix);
-            DisplayMatrix(currentMatrix);
-        }
+       
 
         private void DeleteMatrixButton_Click(object sender, EventArgs e)
         {
@@ -333,5 +330,23 @@ namespace Stochastic_Game_Theory_Calculator
                 Close();
             }
         }
+
+        private void saved_back_Click(object sender, EventArgs e)
+        {
+            if (currentMatrix.VersionsStack.Count > 1)
+            {
+                currentMatrix = copyMatrix(currentMatrix.VersionsStack.Pop());
+                DisplayMatrix(currentMatrix);
+            }
+            else if(currentMatrix.VersionsStack.Count == 1)
+            {
+                DisplayMatrix(currentMatrix);
+            }
+            else
+            {
+                MessageBox.Show("First saved version displayed");
+            }
+        }
+
     }   
 }
